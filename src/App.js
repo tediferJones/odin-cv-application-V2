@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import GeneralInfo from './components/GeneralInfo.js';
+import AcademicExperience from './components/AcademicExperience.js';
 import './App.css';
+const defaultMonth = 'January';
+const defaultYear = '2023';
 
 function App() {
   const [generalData, setGeneralData] = useState({
@@ -21,7 +24,6 @@ function App() {
         [e.target.name]: e.target.value,
       }
     });
-    // console.log(generalData);
   };
 
   function generalDataSubmitHandler(e) {
@@ -31,18 +33,58 @@ function App() {
     });
   };
 
-  const [academicExperience, setAcademicExperience] = useState({
+  const [academicData, setAcademicData] = useState({
     displayPretty: false,
     academicHistory: [],
     inputs: {
       name: '',
       description: '',
-      startMonth: '',
-      startYear: '',
-      endMonth: '',
-      endYear: '',
+      startMonth: defaultMonth,
+      startYear: defaultYear,
+      endMonth: defaultMonth,
+      endYear: defaultYear,
     },
   });
+
+  function academicDataChangeHandler(e) {
+    setAcademicData({
+      ...academicData,
+      inputs: {
+        ...academicData.inputs,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+
+  function academicDataSubmitHandler(e) {
+    // this function should add the inputs object to academicHistory, then restore the inputs to their defaults
+    e.preventDefault();
+    setAcademicData({
+      academicHistory: academicData.academicHistory.concat(academicData.inputs),
+      inputs: {
+        name: '',
+        description: '',
+        startMonth: defaultMonth,
+        startYear: defaultYear,
+        endMonth: defaultMonth,
+        endYear: defaultYear,
+      },
+    });
+  };
+
+  function academicDataToggleForm(e) {
+    if (academicData.displayPretty) {
+      setAcademicData({
+        ...academicData,
+        displayPretty: false,
+      });
+    } else {
+      setAcademicData({
+        ...academicData,
+        displayPretty: true,
+      });
+    }
+  };
 
   // MAKE USE OF PROPS, almost all logic should be in this file, then just pass the data to each component
   // YOU NEED TO ADD onChange and onSubmit here
@@ -53,6 +95,7 @@ function App() {
     <div>
       <h1>HELLO WORLD</h1>
       <GeneralInfo generalData={generalData} changeHandler={generalDataChangeHandler} submitHandler={generalDataSubmitHandler}/>
+      <AcademicExperience academicData={academicData} changeHandler={academicDataChangeHandler} submitHandler={academicDataSubmitHandler} toggleForm={academicDataToggleForm}/>
     </div>
   );
 }
