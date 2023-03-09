@@ -56,7 +56,7 @@ function AcademicExperience(props) {
     <div>
       {props.academicData.academicHistory.length ? academicExperienceDisplay : []}
       {props.academicData.displayPretty ? [] : academicExperienceForm}
-      <button onClick={props.toggleForm}>Toggle Form</button>
+      <button onClick={props.toggleForm} value='academicInfo'>Toggle Form</button>
     </div>
   )
 }

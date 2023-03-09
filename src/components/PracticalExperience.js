@@ -34,7 +34,7 @@ function PracticalExperience(props) {
       <input id='name' name='name' type='text' onChange={props.changeHandler} value={props.practicalData.inputs.name}></input>
 
       <label htmlFor='description'>Description of Duties</label>
-      <textarea id='description' name='description' onChange={props.changeHandler} value={props.practicalData.inputs.description}></textarea>
+      <textarea id='description' name='description' rows={5} onChange={props.changeHandler} value={props.practicalData.inputs.description}></textarea>
 
       <label htmlFor='startMonth'>Start Month</label>
       <select id='startMonth' name='startMonth' onChange={props.changeHandler} value={props.practicalData.inputs.startMonth}>{monthOptions}</select>
@@ -56,7 +56,7 @@ function PracticalExperience(props) {
     <div>
       {props.practicalData.practicalHistory.length ? practicalExperienceDisplay : []}
       {props.practicalData.displayPretty ? [] : practicalExperienceForm}
-      <button onClick={props.toggleForm} value='SOMEVALUE'>Toggle Form</button>
+      <button onClick={props.toggleForm} value='practicalInfo'>Toggle Form</button>
     </div>
   )
 }

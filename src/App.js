@@ -6,6 +6,11 @@ import './App.css';
 const defaultMonth = 'January';
 const defaultYear = new Date().getFullYear();
 
+// YOU WILL PROBABLY HAVE TO RE-WRITE THIS WHOLE FILE
+// USE A SINGLE STATE, WITH ALL VALUES INSIDE IT
+// USE DYNAMIC KEY NAMES (i.e. [string]: value) so that we can combine these repetitve functions
+// IDEALLY, we will only have 3 functions, changeHandler, toggleForm, submitHandler(not needed for generalInfo Component)
+
 function App() {
   const [generalData, setGeneralData] = useState({
     displayPretty: false,
@@ -18,6 +23,9 @@ function App() {
   });
 
   function generalDataChangeHandler(e) {
+    // YOU CAN ADD CUSTOM VALUES TO HTML ELEMENTS, SEE GENERALINFO COMPONENT, AT LAST NAME INPUT
+    // The name of the value must be all lowercase, values must be accessed from the target using .getAttribute(NameOfAttribute)
+    console.log(e.target.getAttribute('test'))
     setGeneralData({
       ...generalData,
       inputs: {
@@ -27,19 +35,19 @@ function App() {
     });
   };
 
-  function generalDataToggleForm(e) {
-    if (generalData.displayPretty) {
-      setGeneralData({
-        ...generalData,
-        displayPretty: false
-      })
-    } else {
-      setGeneralData({
-        ...generalData,
-        displayPretty: true,
-      });
-    }
-  };
+  // function generalDataToggleForm(e) {
+  //   if (generalData.displayPretty) {
+  //     setGeneralData({
+  //       ...generalData,
+  //       displayPretty: false
+  //     })
+  //   } else {
+  //     setGeneralData({
+  //       ...generalData,
+  //       displayPretty: true,
+  //     });
+  //   }
+  // };
 
   const [academicData, setAcademicData] = useState({
     displayPretty: false,
@@ -80,19 +88,19 @@ function App() {
     });
   };
 
-  function academicDataToggleForm(e) {
-    if (academicData.displayPretty) {
-      setAcademicData({
-        ...academicData,
-        displayPretty: false,
-      });
-    } else {
-      setAcademicData({
-        ...academicData,
-        displayPretty: true,
-      });
-    }
-  };
+  // function academicDataToggleForm(e) {
+  //   if (academicData.displayPretty) {
+  //     setAcademicData({
+  //       ...academicData,
+  //       displayPretty: false,
+  //     });
+  //   } else {
+  //     setAcademicData({
+  //       ...academicData,
+  //       displayPretty: true,
+  //     });
+  //   }
+  // };
 
   const [practicalData, setPracticalData] = useState({
     displayPretty: false,
@@ -119,7 +127,7 @@ function App() {
 
   function practicalDataSubmitHandler(e) {
     e.preventDefault();
-    console.log(e)
+    // console.log(e)
     setPracticalData({
       ...practicalData,
       practicalHistory: practicalData.practicalHistory.concat(practicalData.inputs),
@@ -134,20 +142,95 @@ function App() {
     });
   };
 
-  function practicalDataToggleForm(e) {
-    console.log(e.target.value)
-    if (practicalData.displayPretty) {
-      setPracticalData({
-        ...practicalData,
-        displayPretty: false,
+  // function practicalDataToggleForm(e) {
+  //   console.log(e.target.value)
+  //   if (practicalData.displayPretty) {
+  //     setPracticalData({
+  //       ...practicalData,
+  //       displayPretty: false,
+  //     });
+  //   } else {
+  //     setPracticalData({
+  //       ...practicalData,
+  //       displayPretty: true,
+  //     });
+  //   }
+  // };
+
+  // WRONG, need to find some other way to pass a value besides value or name
+  // Both of those already get used by changeHandler, so we're kinda boned
+  function changeHandler(e) {
+    if (e.target.value === 'generalInfo') {
+      setGeneralData({
+        ...generalData,
+        inputs: {
+          ...generalData.inputs,
+          [e.target.name]: e.target.value,
+        }
       });
-    } else {
+    } else if (e.target.value === 'academicInfo') {
+      setAcademicData({
+        ...academicData,
+        inputs: {
+          ...academicData.inputs,
+          [e.target.name]: e.target.value,
+        },
+      });
+    } else if (e.target.value === 'practicalInfo') {
       setPracticalData({
         ...practicalData,
-        displayPretty: true,
+        inputs: {
+          ...practicalData.inputs,
+          [e.target.name]: e.target.value
+        },
       });
     }
-  };
+  }
+
+  function submitHandler(e) {
+
+  }
+
+  // This looks pretty sketchy, try to clean it up
+  function toggleForm(e) {
+    if (e.target.value === 'generalInfo') {
+      if (generalData.displayPretty) {
+        setGeneralData({
+          ...generalData,
+          displayPretty: false
+        })
+      } else {
+        setGeneralData({
+          ...generalData,
+          displayPretty: true,
+        });
+      }
+    } else if (e.target.value === 'academicInfo') {
+      if (academicData.displayPretty) {
+        setAcademicData({
+          ...academicData,
+          displayPretty: false,
+        });
+      } else {
+        setAcademicData({
+          ...academicData,
+          displayPretty: true,
+        });
+      }
+    } else if (e.target.value === 'practicalInfo') {
+      if (practicalData.displayPretty) {
+        setPracticalData({
+          ...practicalData,
+          displayPretty: false,
+        });
+      } else {
+        setPracticalData({
+          ...practicalData,
+          displayPretty: true,
+        });
+      }
+    } 
+  }
 
   // MAKE USE OF PROPS, almost all logic should be in this file, then just pass the data to each component
   // YOU NEED TO ADD onChange and onSubmit here
@@ -157,9 +240,9 @@ function App() {
   return (
     <div>
       <h1>HELLO WORLD</h1>
-      <GeneralInfo generalData={generalData} changeHandler={generalDataChangeHandler} toggleForm={generalDataToggleForm}/>
-      <AcademicExperience academicData={academicData} changeHandler={academicDataChangeHandler} submitHandler={academicDataSubmitHandler} toggleForm={academicDataToggleForm}/>
-      <PracticalExperience practicalData={practicalData} changeHandler={practicalDataChangeHandler} submitHandler={practicalDataSubmitHandler} toggleForm={practicalDataToggleForm}/>
+      <GeneralInfo generalData={generalData} changeHandler={generalDataChangeHandler} toggleForm={toggleForm}/>
+      <AcademicExperience academicData={academicData} changeHandler={academicDataChangeHandler} submitHandler={academicDataSubmitHandler} toggleForm={toggleForm}/>
+      <PracticalExperience practicalData={practicalData} changeHandler={practicalDataChangeHandler} submitHandler={practicalDataSubmitHandler} toggleForm={toggleForm}/>
     </div>
   );
 }
@@ -172,33 +255,31 @@ export default App;
   // Then use that value in the submit function to decide which fields need updating, just like we do in the changeHandler functions wih the stupid [aString]: someValue
 
   // const [data, setData] = useState({
-  //   academicHistory: [],
-  //   practicalHistory: [],
-  //   inputs: {
-  //     generalInfo: {
-  //       displayPretty: false,
-  //       fname: '',
-  //       lname: '',
-  //       phoneNum: '',
-  //       email: '',
-  //     },
-  //     academicInfo: {
-  //       displayPretty: false,
-  //       name: '',
-  //       description: '',
-  //       startMonth: '',
-  //       startYear: '',
-  //       endMonth: '',
-  //       endYear: '',
-  //     },
-  //     practicalInfo: {
-  //       displayPretty: false,
-  //       name: '',
-  //       description: '',
-  //       startMonth: '',
-  //       startYear: '',
-  //       endMonth: '',
-  //       endYear: '',
-  //     }
+  //   generalInfo: {
+  //     displayPretty: false,
+  //     fname: '',
+  //     lname: '',
+  //     phoneNum: '',
+  //     email: '',
   //   },
+  //   academicInfo: {
+  //     academicHistory: [],
+  //     displayPretty: false,
+  //     name: '',
+  //     description: '',
+  //     startMonth: '',
+  //     startYear: '',
+  //     endMonth: '',
+  //     endYear: '',
+  //   },
+  //   practicalInfo: {
+  //     practicalHistory: [],
+  //     displayPretty: false,
+  //     name: '',
+  //     description: '',
+  //     startMonth: '',
+  //     startYear: '',
+  //     endMonth: '',
+  //     endYear: '',
+  //   }
   // })

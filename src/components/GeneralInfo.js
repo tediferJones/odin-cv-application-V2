@@ -6,7 +6,7 @@ function GeneralInfo(props) {
       <input id='fname' name='fname' type='text' onChange={props.changeHandler} value={props.generalData.inputs.fname}></input>
 
       <label htmlFor='lname'>Last Name:</label>
-      <input id='lname' name='lname' type='text' onChange={props.changeHandler} value={props.generalData.inputs.lname}></input>
+      <input id='lname' name='lname' type='text' test='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.lname}></input>
 
       <label htmlFor='phoneNum'>Phone Number:</label>
       <input id='phoneNum' name='phoneNum' type='tel' onChange={props.changeHandler} value={props.generalData.inputs.phoneNum}></input>
@@ -14,7 +14,8 @@ function GeneralInfo(props) {
       <label htmlFor='email'>Email Address:</label>
       <input id='email' name='email' type='email' onChange={props.changeHandler} value={props.generalData.inputs.email}></input>
 
-      <button type='submit'>Submit</button>
+      {/* <button type='submit'>Submit</button> */}
+      <button onClick={props.toggleForm} value='generalInfo'>Submit</button>
     </form>
   )
 
@@ -24,7 +25,7 @@ function GeneralInfo(props) {
       <h1>{props.generalData.inputs.lname}</h1>
       <h1>{props.generalData.inputs.phoneNum}</h1>
       <h1>{props.generalData.inputs.email}</h1>
-      <button onClick={props.toggleForm}>Edit</button>
+      <button onClick={props.toggleForm} value='generalInfo'>Edit</button>
     </div>
   )
 
