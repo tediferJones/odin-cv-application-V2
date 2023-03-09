@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-const currentYear = 2023;
+const currentYear = new Date().getFullYear();
 
 function AcademicExperience(props) {
   const monthOptions = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(month => {
@@ -20,7 +20,7 @@ function AcademicExperience(props) {
 
   const academicExperienceDisplay = props.academicData.academicHistory.map(listItem => {
     return (
-      <li>
+      <li key={uuidv4()}>
         <h3>{listItem.name}</h3>
         <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
         <p>{listItem.description}</p>
