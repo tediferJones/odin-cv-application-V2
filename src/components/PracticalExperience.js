@@ -18,7 +18,7 @@ function PracticalExperience(props) {
     );
   });
 
-  const practicalExperienceDisplay = props.practicalData.practicalHistory.map(listItem => {
+  const practicalExperienceDisplay = props.practicalData.saved.map(listItem => {
     return (
       <li key={uuidv4()}>
         <h3>{listItem.name}</h3>
@@ -29,34 +29,34 @@ function PracticalExperience(props) {
   });
 
   const practicalExperienceForm = (
-    <form onSubmit={props.submitHandler}>
+    <form>
       <label htmlFor='name'>Name of Company</label>
-      <input id='name' name='name' type='text' onChange={props.changeHandler} value={props.practicalData.inputs.name}></input>
+      <input id='name' name='name' type='text' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.name}></input>
 
       <label htmlFor='description'>Description of Duties</label>
-      <textarea id='description' name='description' rows={5} onChange={props.changeHandler} value={props.practicalData.inputs.description}></textarea>
+      <textarea id='description' name='description' rows={5} componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.description}></textarea>
 
       <label htmlFor='startMonth'>Start Month</label>
-      <select id='startMonth' name='startMonth' onChange={props.changeHandler} value={props.practicalData.inputs.startMonth}>{monthOptions}</select>
+      <select id='startMonth' name='startMonth' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.startMonth}>{monthOptions}</select>
 
       <label htmlFor='startYear'>Start Year</label>
-      <select id='startYear' name='startYear' onChange={props.changeHandler} value={props.practicalData.inputs.startYear}>{yearOptions}</select>
+      <select id='startYear' name='startYear' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.startYear}>{yearOptions}</select>
 
       <label htmlFor='endMonth'>End Month</label>
-      <select id='endMonth' name='endMonth' onChange={props.changeHandler} value={props.practicalData.inputs.endMonth}>{monthOptions}</select>
+      <select id='endMonth' name='endMonth' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.endMonth}>{monthOptions}</select>
 
       <label htmlFor='endYear'> End Year</label>
-      <select id='endYear' name='endYear' onChange={props.changeHandler} value={props.practicalData.inputs.endYear}>{yearOptions}</select>
+      <select id='endYear' name='endYear' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.endYear}>{yearOptions}</select>
 
-      <button type='submit'>Add Entry</button>
+      <button onClick={props.submitHandler} componentname='practicalInfo'>Add Entry</button>
     </form>
   )
 
   return (
     <div>
-      {props.practicalData.practicalHistory.length ? practicalExperienceDisplay : []}
+      {props.practicalData.saved.length ? practicalExperienceDisplay : []}
       {props.practicalData.displayPretty ? [] : practicalExperienceForm}
-      <button onClick={props.toggleForm} value='practicalInfo'>Toggle Form</button>
+      <button onClick={props.toggleForm} componentname='practicalInfo'>Toggle Form</button>
     </div>
   )
 }

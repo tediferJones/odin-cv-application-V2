@@ -1,21 +1,20 @@
 function GeneralInfo(props) {
   // console.log(props);
   const GeneralInfoForm = (
-    <form onSubmit={props.toggleForm}>
+    <form>
       <label htmlFor='fname'>First Name:</label>
-      <input id='fname' name='fname' type='text' onChange={props.changeHandler} value={props.generalData.inputs.fname}></input>
+      <input id='fname' name='fname' type='text' componentname='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.fname}></input>
 
       <label htmlFor='lname'>Last Name:</label>
-      <input id='lname' name='lname' type='text' test='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.lname}></input>
+      <input id='lname' name='lname' type='text' componentname='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.lname}></input>
 
       <label htmlFor='phoneNum'>Phone Number:</label>
-      <input id='phoneNum' name='phoneNum' type='tel' onChange={props.changeHandler} value={props.generalData.inputs.phoneNum}></input>
+      <input id='phoneNum' name='phoneNum' type='tel' componentname='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.phoneNum}></input>
 
       <label htmlFor='email'>Email Address:</label>
-      <input id='email' name='email' type='email' onChange={props.changeHandler} value={props.generalData.inputs.email}></input>
+      <input id='email' name='email' type='email' componentname='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.email}></input>
 
-      {/* <button type='submit'>Submit</button> */}
-      <button onClick={props.toggleForm} value='generalInfo'>Submit</button>
+      <button onClick={props.toggleForm} componentname='generalInfo'>Submit</button>
     </form>
   )
 
@@ -25,7 +24,7 @@ function GeneralInfo(props) {
       <h1>{props.generalData.inputs.lname}</h1>
       <h1>{props.generalData.inputs.phoneNum}</h1>
       <h1>{props.generalData.inputs.email}</h1>
-      <button onClick={props.toggleForm} value='generalInfo'>Edit</button>
+      <button onClick={props.toggleForm} componentname='generalInfo'>Edit</button>
     </div>
   )
 

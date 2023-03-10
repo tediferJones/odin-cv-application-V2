@@ -6,10 +6,109 @@ import './App.css';
 const defaultMonth = 'January';
 const defaultYear = new Date().getFullYear();
 
-// YOU WILL PROBABLY HAVE TO RE-WRITE THIS WHOLE FILE
-// USE A SINGLE STATE, WITH ALL VALUES INSIDE IT
-// USE DYNAMIC KEY NAMES (i.e. [string]: value) so that we can combine these repetitve functions
-// IDEALLY, we will only have 3 functions, changeHandler, toggleForm, submitHandler(not needed for generalInfo Component)
+function AppV2() {
+  const [data, setData] = useState({
+    generalInfo: {
+      displayPretty: false,
+      inputs: {
+        fname: '',
+        lname: '',
+        phoneNum: '',
+        email: '',
+      },
+    },
+    academicInfo: {
+      saved: [],
+      displayPretty: false,
+      inputs: {
+        name: '',
+        description: '',
+        startMonth: defaultMonth,
+        startYear: defaultYear,
+        endMonth: defaultMonth,
+        endYear: defaultYear,
+      },
+    },
+    practicalInfo: {
+      saved: [],
+      displayPretty: false,
+      inputs: {
+        name: '',
+        description: '',
+        startMonth: defaultMonth,
+        startYear: defaultYear,
+        endMonth: defaultMonth,
+        endYear: defaultYear,
+      },
+    },
+  });
+
+  // Instead of using setData(literalObject), define a var as a copy of state data, then operate on that and just setState(thatVar)
+  // This reduces our dependency on the spread operator and should overall make this code look dead simple
+
+  function changeHandler(e) {
+    setData({
+      ...data,
+      [e.target.getAttribute('componentname')]: {
+        ...data[e.target.getAttribute('componentname')],
+        inputs: {
+          ...data[e.target.getAttribute('componentname')].inputs,
+          [e.target.name]: e.target.value,
+        },
+      },
+    });
+  };
+
+  function toggleForm(e) {
+    e.preventDefault();
+    if (data[e.target.getAttribute('componentname')].displayPretty) {
+      setData({
+        ...data,
+        [e.target.getAttribute('componentname')]: {
+          ...data[e.target.getAttribute('componentname')],
+          displayPretty: false,
+        },
+      });
+    } else {
+      setData({
+        ...data,
+        [e.target.getAttribute('componentname')]: {
+          ...data[e.target.getAttribute('componentname')],
+          displayPretty: true,
+        },
+      });
+    }
+  };
+
+  function submitHandler(e) {
+    e.preventDefault();
+    setData({
+      ...data,
+      [e.target.getAttribute('componentname')]: {
+        ...data[e.target.getAttribute('componentname')],
+        saved: data[e.target.getAttribute('componentname')].saved.concat(data[e.target.getAttribute('componentname')].inputs),
+        inputs: {
+          name: '',
+          description: '',
+          startMonth: defaultMonth,
+          startYear: defaultYear,
+          endMonth: defaultMonth,
+          endYear: defaultYear,
+        },
+      },
+    });
+  };
+
+  return(
+    <div>
+      <h1>APPV2</h1>
+      <GeneralInfo generalData={data.generalInfo} changeHandler={changeHandler} toggleForm={toggleForm}/>
+      <AcademicExperience academicData={data.academicInfo} changeHandler={changeHandler} toggleForm={toggleForm} submitHandler={submitHandler}/>
+      <PracticalExperience practicalData={data.practicalInfo} changeHandler={changeHandler} toggleForm={toggleForm} submitHandler={submitHandler}/>
+    </div>
+  )
+}
+
 
 function App() {
   const [generalData, setGeneralData] = useState({
@@ -247,7 +346,7 @@ function App() {
   );
 }
 
-export default App;
+export default AppV2;
 
   // This code is very repitive, instead of making 3 change handlers and 3 submit handlers, just make one that sets the value depending on where it was sent from
   // To do this convert forms into something else idk but the button can't have type submit, 
