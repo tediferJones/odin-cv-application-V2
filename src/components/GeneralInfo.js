@@ -1,5 +1,4 @@
 function GeneralInfo(props) {
-  // console.log(props);
   const GeneralInfoForm = (
     <form>
       <label htmlFor='fname'>First Name:</label>

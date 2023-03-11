@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 const currentYear = new Date().getFullYear();
 
 function AcademicExperience(props) {
-  // console.log(props);
   const monthOptions = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(month => {
     return (
       <option key={uuidv4()} value={month}>
@@ -20,7 +19,6 @@ function AcademicExperience(props) {
   });
 
   const academicExperienceDisplay = props.academicData.saved.map(listItem => {
-    // console.log(props.academicData.saved)
     return (
       <li key={uuidv4()}>
         <h3>{listItem.name}</h3>
