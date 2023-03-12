@@ -21,9 +21,15 @@ function PracticalExperience(props) {
   const practicalExperienceDisplay = props.practicalData.saved.map(listItem => {
     return (
       <li key={uuidv4()}>
-        <h3>{listItem.name}</h3>
-        <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
+        <div className='displayTitle'>
+          <h3>{listItem.name}</h3>
+          <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
+        </div>
         <p>{listItem.description}</p>
+        <div>
+          <button onClick={props.updateSaved} componentname='practicalInfo' value={listItem.id}>Edit</button>
+          <button onClick={props.deleteSaved} componentname='practicalInfo' value={listItem.id}>Delete</button>
+        </div>
       </li>
     );
   });
@@ -53,7 +59,7 @@ function PracticalExperience(props) {
   )
 
   return (
-    <div>
+    <div className='section'>
       {props.practicalData.saved.length ? practicalExperienceDisplay : []}
       {props.practicalData.displayPretty ? [] : practicalExperienceForm}
       <button onClick={props.toggleForm} componentname='practicalInfo'>Toggle Form</button>

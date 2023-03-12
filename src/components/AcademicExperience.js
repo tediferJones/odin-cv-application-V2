@@ -20,10 +20,16 @@ function AcademicExperience(props) {
 
   const academicExperienceDisplay = props.academicData.saved.map(listItem => {
     return (
-      <li key={uuidv4()}>
-        <h3>{listItem.name}</h3>
-        <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
+      <li key={listItem.id}>
+        <div className='displayTitle'>
+          <h3>{listItem.name}</h3>
+          <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
+        </div>
         <p>{listItem.description}</p>
+        <div>
+          <button onClick={props.updateSaved} componentname='academicInfo' value={listItem.id}>Edit</button>
+          <button onClick={props.deleteSaved} componentname='academicInfo' value={listItem.id}>Delete</button>
+        </div>
       </li>
     );
   });
@@ -53,7 +59,7 @@ function AcademicExperience(props) {
   )
 
   return (
-    <div>
+    <div className='section'>
       {props.academicData.saved.length ? academicExperienceDisplay : []}
       {props.academicData.displayPretty ? [] : academicExperienceForm}
       <button onClick={props.toggleForm} componentname='academicInfo'>Toggle Form</button>

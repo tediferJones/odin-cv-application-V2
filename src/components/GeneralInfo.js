@@ -13,23 +13,23 @@ function GeneralInfo(props) {
       <label htmlFor='email'>Email Address:</label>
       <input id='email' name='email' type='email' componentname='generalInfo' onChange={props.changeHandler} value={props.generalData.inputs.email}></input>
 
-      <button onClick={props.toggleForm} componentname='generalInfo'>Submit</button>
+      {/* <button onClick={props.toggleForm} componentname='generalInfo'>Submit</button> */}
     </form>
   )
 
   const GeneralInfoDisplay = (
-    <div>
-      <h1>{props.generalData.inputs.fname}</h1>
-      <h1>{props.generalData.inputs.lname}</h1>
-      <h1>{props.generalData.inputs.phoneNum}</h1>
-      <h1>{props.generalData.inputs.email}</h1>
-      <button onClick={props.toggleForm} componentname='generalInfo'>Edit</button>
+    <div className='generalInfoDisplay'>
+      <h3>{`${props.generalData.inputs.fname} ${props.generalData.inputs.lname}`}</h3>
+      <h4>{props.generalData.inputs.phoneNum}</h4>
+      <h4>{props.generalData.inputs.email}</h4>
+      {/* <button onClick={props.toggleForm} componentname='generalInfo'>Edit</button> */}
     </div>
   )
 
   return (
-    <div>
+    <div className='section'>
       {props.generalData.displayPretty ? GeneralInfoDisplay : GeneralInfoForm}
+      <button onClick={props.toggleForm} componentname='generalInfo'>{props.generalData.displayPretty ? 'Edit' : 'Submit'}</button>
     </div>
   )
 }

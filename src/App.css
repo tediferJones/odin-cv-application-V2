@@ -1,38 +1,86 @@
-.App {
-  text-align: center;
+:root {
+  --primaryBackgroundColor: #ffffff;
+  --primary: #00203FFF;
+  --accent: #ADEFD1FF;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  font-family: Lato;
+  font-size: 24px;
+  background-color:var(--primary);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  color: var(--primary);
+  background-color: var(--accent);
+  margin: 0;
+  padding: 1em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.section {
+  background-color: var(--accent);
+  margin: 1em 4em;
+
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.generalInfoDisplay {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.generalInfoDisplay * {
+  margin: 0.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+li {
+  list-style-type: none;
+}
+
+.displayTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li p {
+  padding: 0 1.5em;
+}
+
+form {
+  /* padding: 1em; */
+  display: flex;
+  flex-direction: column;
+}
+
+input, select, option, button, textarea {
+  font-family: Lato;
+  font-size: 24px;
+  padding: 0.5em;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: var(--accent);
+  font-weight: bold;
+  margin-top: 1em;
+  transition: 0.5s;
+}
+
+button:hover {
+  background-color: var(--accent);
+  color: var(--primary);
+  transition: 0.5s;
 }
