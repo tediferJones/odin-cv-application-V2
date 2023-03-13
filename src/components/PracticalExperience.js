@@ -26,7 +26,7 @@ function PracticalExperience(props) {
           <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
         </div>
         <p>{listItem.description}</p>
-        <div>
+        <div className={props.practicalData.displayPretty ? 'hidden' : 'savedTools'}>
           <button onClick={props.updateSaved} componentname='practicalInfo' value={listItem.id}>Edit</button>
           <button onClick={props.deleteSaved} componentname='practicalInfo' value={listItem.id}>Delete</button>
         </div>
@@ -37,7 +37,7 @@ function PracticalExperience(props) {
   const practicalExperienceForm = (
     <form>
       <label htmlFor='name'>Name of Company</label>
-      <input id='name' name='name' type='text' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.name}></input>
+      <input id='name' name='name' type='text' componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.name} required></input>
 
       <label htmlFor='description'>Description of Duties</label>
       <textarea id='description' name='description' rows={5} componentname='practicalInfo' onChange={props.changeHandler} value={props.practicalData.inputs.description}></textarea>
@@ -60,9 +60,10 @@ function PracticalExperience(props) {
 
   return (
     <div className='section'>
+      <h2>Practical Experience</h2>
       {props.practicalData.saved.length ? practicalExperienceDisplay : []}
       {props.practicalData.displayPretty ? [] : practicalExperienceForm}
-      <button onClick={props.toggleForm} componentname='practicalInfo'>Toggle Form</button>
+      <button onClick={props.toggleForm} componentname='practicalInfo' className={props.practicalData.displayPretty ? 'editButton' : ''}>{props.practicalData.displayPretty ? 'Edit' : 'Done'}</button>
     </div>
   )
 }

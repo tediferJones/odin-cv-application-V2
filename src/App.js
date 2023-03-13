@@ -74,13 +74,11 @@ function App() {
     e.preventDefault();
     const foundItem = data[e.target.getAttribute('componentname')].saved.filter(savedItem => savedItem.id === data[e.target.getAttribute('componentname')].inputs.id)[0];
     if (foundItem) {
-      const newItem = data[e.target.getAttribute('componentname')].inputs;
-      console.log(newItem);
       setData({
         ...data,
         [e.target.getAttribute('componentname')]: {
           ...data[e.target.getAttribute('componentname')],
-          saved: data[e.target.getAttribute('componentname')].saved.map(savedItem => (savedItem.id === foundItem.id ? newItem : savedItem)),
+          saved: data[e.target.getAttribute('componentname')].saved.map(savedItem => (savedItem.id === foundItem.id ? data[e.target.getAttribute('componentname')].inputs : savedItem)),
           inputs: {
             id: uuidv4(),
             name: '',
@@ -137,7 +135,7 @@ function App() {
 
   return(
     <div className='content'>
-      <h1 className='header'>APPV2</h1>
+      <h1 className='header'>CV Application V2</h1>
       <GeneralInfo generalData={data.generalInfo} changeHandler={changeHandler} toggleForm={toggleForm}/>
       <AcademicExperience academicData={data.academicInfo} changeHandler={changeHandler} toggleForm={toggleForm} submitHandler={submitHandler} deleteSaved={deleteSaved} updateSaved={updateSaved}/>
       <PracticalExperience practicalData={data.practicalInfo} changeHandler={changeHandler} toggleForm={toggleForm} submitHandler={submitHandler} deleteSaved={deleteSaved} updateSaved={updateSaved}/>

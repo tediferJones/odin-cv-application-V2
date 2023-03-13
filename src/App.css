@@ -1,5 +1,4 @@
 :root {
-  --primaryBackgroundColor: #ffffff;
   --primary: #00203FFF;
   --accent: #ADEFD1FF;
 }
@@ -8,6 +7,7 @@ body {
   margin: 0;
   font-family: Lato;
   font-size: 24px;
+  color: var(--primary);
   background-color:var(--primary);
 }
 
@@ -16,6 +16,7 @@ body {
   background-color: var(--accent);
   margin: 0;
   padding: 1em;
+  margin-bottom: 1em;
 }
 
 .content {
@@ -57,6 +58,20 @@ li p {
   padding: 0 1.5em;
 }
 
+.savedTools {
+  display: flex;
+  justify-content: end;
+  gap: 1em;
+}
+
+.savedTools button {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
 form {
   /* padding: 1em; */
   display: flex;
@@ -83,4 +98,15 @@ button:hover {
   background-color: var(--accent);
   color: var(--primary);
   transition: 0.5s;
+}
+
+.editButton {
+  align-self: flex-end;
+  background-color: var(--accent);
+  color: var(--primary)
+}
+
+.editButton:hover {
+  background-color: var(--primary);
+  color: var(--accent);
 }

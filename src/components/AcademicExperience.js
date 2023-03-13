@@ -26,7 +26,7 @@ function AcademicExperience(props) {
           <h4>{listItem.startMonth} {listItem.startYear} - {listItem.endMonth} {listItem.endYear}</h4>
         </div>
         <p>{listItem.description}</p>
-        <div>
+        <div className={props.academicData.displayPretty ? 'hidden' : 'savedTools'}>
           <button onClick={props.updateSaved} componentname='academicInfo' value={listItem.id}>Edit</button>
           <button onClick={props.deleteSaved} componentname='academicInfo' value={listItem.id}>Delete</button>
         </div>
@@ -60,9 +60,10 @@ function AcademicExperience(props) {
 
   return (
     <div className='section'>
+      <h2>Academic Experience</h2>
       {props.academicData.saved.length ? academicExperienceDisplay : []}
       {props.academicData.displayPretty ? [] : academicExperienceForm}
-      <button onClick={props.toggleForm} componentname='academicInfo'>Toggle Form</button>
+      <button onClick={props.toggleForm} componentname='academicInfo' className={props.academicData.displayPretty ? 'editButton' : ''}>{props.academicData.displayPretty ? 'Edit' : 'Done'}</button>
     </div>
   )
 }
