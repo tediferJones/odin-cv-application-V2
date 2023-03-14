@@ -60,7 +60,7 @@ li p {
 
 .savedTools {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 1em;
 }
 
